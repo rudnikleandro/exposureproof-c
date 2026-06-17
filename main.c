@@ -61,6 +61,42 @@ int main(int argc, char *argv[]) {
 
         if (connect(sockfd, p->ai_addr, p->ai_addrlen) == 0) {
             printf("TCP connection: successful to %s:%s\n", ip_address, port);
+            
+            char request[512];
+
+            snprintf(
+                request,
+                sizeof(request),
+                "HEAD / HTTP/1.1\r\n"
+                "Host: %s\r\n"
+                "User-Agent: ExposureProof-C/0.1\r\n"
+                "Connection: close\r\n"
+                "\r\n",
+                target
+            );
+
+            ssize_t bytes_sent = send(sockfd, request, strlen(request), 0);
+
+            if (bytes_sent == 1) {
+                perror("send failed");
+                close(sockfd);
+                continue;
+            }
+
+            char response[4096];
+
+            ssize_t bytes_received = recv(sockfd, response, sizeof(response) -1, 0);
+
+            if (bytes_received == -1) {
+                perror("recv failed");
+                close(sockfd);
+                continue;
+            }
+
+            response[bytes_received] = '\0';
+
+            printf("\nHTTP response:\n%s\n", response);
+
             connected = 1;
             close(sockfd);
             break;

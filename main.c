@@ -95,7 +95,25 @@ int main(int argc, char *argv[]) {
 
             response[bytes_received] = '\0';
 
-            printf("\nHTTP response:\n%s\n", response);
+            char *line_end = strstr(response, "\r\n");
+
+            if (line_end != NULL) {
+                size_t status_line_len = line_end - response;
+                char status_line[256];
+                
+                if (status_line_len >= sizeof(status_line)) {
+                    status_line_len = sizeof(status_line) -1;
+                }
+
+                memcpy(status_line, response, status_line_len);
+                status_line[status_line_len] = '\0';
+
+                printf("\nHTTP status: %s\n", status_line);
+            } else {
+                printf("\nHTTP status: unvailable\n");
+            }
+
+            printf("\nRaw HTTP response:\n%s\n", response);
 
             connected = 1;
             close(sockfd);

@@ -162,6 +162,39 @@ int main(int argc, char *argv[])
                 printf("HTTP location: not present\n");
             }
 
+            char *server_start = strstr(response, "\r\nServer: ");
+
+            if (server_start != NULL)
+            {
+                server_start += strlen("\r\nServer: ");
+
+                char *server_end = strstr(server_start, "\r\n");
+
+                if (server_end != NULL)
+                {
+                    size_t server_len = server_end - server_start;
+                    char server[256];
+
+                    if (server_len >= sizeof(server))
+                    {
+                        server_len = sizeof(server) - 1;
+                    }
+
+                    memcpy(server, server_start, server_len);
+                    server[server_len] = '\0';
+
+                    printf("HTTP server: %s\n", server);
+                }
+                else
+                {
+                    printf("HTTP server: unavailable\n");
+                }
+            }
+            else
+            {
+                printf("HTTP server: not disclosed\n");
+            }
+
             printf("\nRaw HTTP response:\n%s\n", response);
 
             connected = 1;

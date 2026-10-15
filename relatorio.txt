@@ -1,0 +1,66 @@
+EXPOSUREPROOF REPORT
+
+  Generated     2026-10-14 22:51 -0300
+  Domains       1
+  Mode          active: one HTTP request per domain went to the target
+                from your IP (User-Agent ExposureProof-C/0.2)
+  Note          DNS queries reach the targets' nameservers through the
+                resolver, not from your IP; WHOIS and ASN lookups only
+                reach registries.
+
+
+================================================================================
+google.com
+================================================================================
+
+SUMMARY
+  Signals       1 info
+  Registered    1997-09-15 (29 years ago), MarkMonitor Inc.
+  Hosting       AS15169 GOOGLE - Google LLC, US
+  DNS provider  google.com
+  Mail          Google Workspace
+
+SIGNALS
+  [INFO]   The TXT lookup failed, so SPF and verification tokens could not be
+           checked.
+
+ADDRESSES
+  172.217.172.142
+    PTR         pngrub-am-in-f14.1e100.net
+    ASN         AS15169 GOOGLE - Google LLC, US
+    Prefix      172.217.0.0/16 (US, arin, allocated 2012-04-16)
+
+HTTP
+  Endpoint      172.217.172.142:80
+  Status        HTTP/1.1 301 Moved Permanently
+  Location      http://www.google.com/
+  Server        gws
+
+DNS
+  Resolver      system (192.168.15.1, 192.168.68.1)
+  NS            ns1.google.com
+                ns2.google.com
+                ns3.google.com
+                ns4.google.com
+  MX            10  smtp.google.com
+  SPF           unknown (TXT lookup failed)
+  DMARC         v=DMARC1; p=reject; rua=mailto:mailauth-reports@google.com
+  CAA           issue "pki.goog"
+  SOA           ns1.google.com, admin dns-admin.google.com, serial 998506478
+  TXT           lookup failed
+
+WHOIS
+  Server        whois.verisign-grs.com
+  Registrar     MarkMonitor Inc.
+  Created       1997-09-15T04:00:00Z
+  Updated       2019-09-09T15:39:04Z
+  Expires       2028-09-14T04:00:00Z
+  Registrant    not in the registry record
+
+CONTACTED
+  system (192.168.15.1, 192.168.68.1)
+                                all DNS lookups
+  whois.iana.org                WHOIS server for .com
+  whois.verisign-grs.com        registration of google.com
+  whois.cymru.com               network of 1 address
+  172.217.172.142:80            HTTP request from your IP (target)

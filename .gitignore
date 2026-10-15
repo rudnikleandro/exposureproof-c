@@ -1,3 +1,4 @@
 exposureproof
+build/
 *.o
 .DS_Store

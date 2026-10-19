@@ -1,0 +1,27 @@
+Frozen responses used by the tests, so parsers are tested without network
+access. Each file is the exact bytes returned by the server for the query
+below, collected on 2026-10-17 (UTC-3), except where noted.
+
+File                           Server                   Query
+whois_verisign_registered.txt  whois.verisign-grs.com   anthropic.com
+whois_verisign_not_found.txt   whois.verisign-grs.com   umdominioqueprovavelmentenaoexiste12345.com
+whois_nominet.txt              whois.nic.uk             bbc.co.uk
+whois_registro_br.txt          whois.registro.br        uol.com.br
+cymru_announced.txt            whois.cymru.com          " -v 8.8.8.8"
+cymru_private.txt              whois.cymru.com          " -v 10.0.0.1"
+
+Changes from the original bytes:
+- whois_registro_br.txt: the values of the two "e-mail:" lines were replaced
+  with redacted@example.invalid. They were organizational role addresses,
+  not personal data, but the parser does not use them.
+
+SHA-256 of the files as stored:
+ed682a2b23997b9386b08ca1bb2dbb509a63723491eddc1611501222be3315a5  cymru_announced.txt
+b0c400a86f3446e82141191de4989990c9abb4cd316360baf610dbad1ecd501a  cymru_private.txt
+d6c6b73411c40570c24ffcd73d7e29628649d2864fad44001f7ce25c390cb7c2  whois_nominet.txt
+a97e1229483a9552456225b421a84a57f87e8babc0fa9dde6d8c51717a02fbc8  whois_registro_br.txt
+a6b087ee56974de74b14aeb9e94483cab06784466fc2615b33846f36f46a9400  whois_verisign_not_found.txt
+295a4773258409908d5f8c9406246afa1c59cde22159ef930c19057c7c13107b  whois_verisign_registered.txt
+
+The responses include each registry's terms of use, which allow lookups for
+lawful purposes; they are kept here only as parser test data.
